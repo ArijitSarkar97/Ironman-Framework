@@ -1,0 +1,24 @@
+
+browser:
+  default: "chrome"
+  headless: false
+  implicit_wait: 10
+  page_load_timeout: 30
+
+environments:
+  dev:
+    base_url: "https://testautomationpractice.blogspot.com/"
+    username: "admin"
+    password: "password"
+  staging:
+    base_url: "https://testautomationpractice.blogspot.com/"
+    username: "admin"
+    password: "password"
+  prod:
+    base_url: "https://testautomationpractice.blogspot.com/"
+    username: "admin"
+    password: "password"
+
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
