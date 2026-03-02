@@ -4,10 +4,11 @@ import allure
 from config.environment import Environment
 from tests.base_test import BaseTest
 from pages.home_page_Arijit import OrangePetHomePage
+from pages.product_list_page_Arijit import OrangePetProductListPage
 
 
 @allure.epic("pytest-automation")
-@allure.feature("AutomationTestingPraPage")
+@allure.feature("Orange_pet")
 
 class TestOrengePetLogin(BaseTest):
 
@@ -15,21 +16,24 @@ class TestOrengePetLogin(BaseTest):
     @allure.title("test_automation_testing_pra_page_fill_all_inputs Execution")
     @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.arijit
-    def test_login(self, driver, config):
+    def test_end_to_end(self, driver, config):
 
         # Initialize Page Objects
         homepage = OrangePetHomePage(driver)
-        env = Environment("orenge_pet")
-        email = env.get_username()
-        password = env.get_password()
+        product_list_page=OrangePetProductListPage(driver)
 
         driver.get(config.get('environments', {}).get('orenge_pet', {}).get('base_url', ''))
-        with allure.step(f"1. Click on My Account \n"):
-            homepage.click_on_my_account()
+        with allure.step(f"1. Hover to Dog\n"):
+            homepage.hover_to_dog()
+            self.logger.info("Hover on Dog Module")
 
-            self.logger.info("Clicked on My Account successfully")
-        with allure.step(f"2. Fill email_input with valid data \n"):
-            homepage.login(email, password)
+        with allure.step(f"2. Click on Dry food \n"):
+            homepage.click_on_dog_dryfood()
+            self.logger.info("Clicked on Dog dry food successfully")
+
+        with allure.step(f"3. Click on filter \n"):
+            product_list_page.click_on_in_stock()
+            product_list_page.get_all_product()
             time.sleep(10)
-            self.logger.info("Fill email_input with valid data executed successfully")
+            self.logger.info("Clicked on Dog dry food successfully")
 

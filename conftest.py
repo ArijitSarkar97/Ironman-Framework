@@ -64,8 +64,22 @@ def driver(request, config):
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--disable-extensions")
+        # Remove "Chrome is being controlled by automated test software"
+        options.add_experimental_option("excludeSwitches", ["enable-automation"])
+
+        # Disable automation extension
+        options.add_experimental_option("useAutomationExtension", False)
+
+        # Disable blink automation flag
+        options.add_argument("--disable-blink-features=AutomationControlled")
+
+        options.page_load_strategy = 'eager'
         try:
             driver = webdriver.Chrome(options=options)
+            # Remove webdriver property
+            driver.execute_script(
+                "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+            )
         except Exception as e:
             raise RuntimeError(
                 f"Failed to start Chrome. Make sure Google Chrome is installed.\n"
