@@ -29,6 +29,7 @@ env/
 ENV/
 env.bak/
 venv.bak/
+lavanya_venv/
 
 # Logs
 logs/
