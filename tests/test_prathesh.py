@@ -10,14 +10,14 @@ from tests.base_test import BaseTest
 from pages.SA_Seed_Based_Food import SeedBasedFood
 from pages.SA_Pelleted_Food import PelletedFood
 from pages.SA_Supplements import Supplements
-from utils.data_reader import read_excel_data
+from utils.data_reader_prathesh import read_excel_data
 
 
 @allure.epic("pytest-automation")
 @allure.feature("AutomationTestingPraPage")
-@pytest.mark.rfailure(reruns = 2, reruns_delay = 2)
+@pytest.mark.flaky(reruns = 2, reruns_delay = 2)
 class TestSmallAnimals(BaseTest):
-    data = read_excel_data(r"C:\Users\shoba\OneDrive\Ironman-Framework\test_data\checkout_test_data (1).xlsx")
+    data = read_excel_data(r"C:\Users\shoba\OneDrive\Desktop\New folder (3)\Ironman-Framework\test-data\checkout_test_data.xlsx")
 
     @allure.story("test_automation_testing_pra_page_fill_all_inputs")
     @allure.title("test_automation_testing_pra_page_fill_all_inputs Execution")
@@ -83,16 +83,14 @@ class TestSmallAnimals(BaseTest):
         with allure.step("Enter City Name"):
             small_animals.enter_city(City)
             self.logger.info("Enter City")
-        with allure.step("Click State"):
-            small_animals.click_state()
-            self.logger.info("Click State")
         with allure.step("Select State"):
             small_animals.select_state(State)
             self.logger.info("Select State")
         with allure.step("Enter Phone"):
             small_animals.enter_PINCODE(PINCode)
             self.logger.info("Enter Phone")
-        with allure.step("Click Save Info"):
-            small_animals.click_save_info()
-            self.logger.info("Click Save Info")
+        with allure.step("Enter Phone"):
+            small_animals.enter_phone(Phone)
+            self.logger.info("Enter Phone")
+
 
