@@ -59,6 +59,14 @@ def read_test_data(file_path: str, format: str = 'csv') -> List:
     if format.lower() == 'csv': return read_csv_data(file_path)
     elif format.lower() == 'json': return read_json_data(file_path)
     else: raise ValueError(f"Unsupported format: {format}")
+def read_excel_data(file_path, sheet_name):
+    workbook=openpyxl.load_workbook(file_path)
+    sheet=workbook[sheet_name]
+
+    data=[]
+    for row in sheet.iter_rows(min_row=2, values_only=True):
+        data.append(row)
+    return data
 
 def get_excel_data(file_path, sheet_name):
     workbook = openpyxl.load_workbook(file_path)
