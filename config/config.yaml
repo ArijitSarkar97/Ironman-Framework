@@ -19,6 +19,12 @@ environments:
     username: "admin"
     password: "password"
 
+  orange:
+    base_url: "https://www.orangepet.in/"
+    username: "jrsuraj123@gmail.com"
+    password: "123456"
+
 logging:
   level: INFO
   format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+

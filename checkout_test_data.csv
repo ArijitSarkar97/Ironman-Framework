@@ -1,0 +1,11 @@
+Email,FirstName,LastName,Address,Apartment,City,State,PINCode,Phone
+testuser1@example.com,Rahul,Sharma,12 MG Road,Apt 4B,Bengaluru,Karnataka,560001,9876543210
+testuser2@example.com,Priya,Singh,45 Park Street,Flat 12,Kolkata,West Bengal,700016,9876543211
+testuser3@example.com,Amit,Patel,78 SG Highway,Tower C,Ahmedabad,Gujarat,380015,9876543212
+testuser4@example.com,Sneha,Reddy,90 Jubilee Hills,Villa 5,Hyderabad,Telangana,500033,9876543213
+testuser5@example.com,Vikram,Chauhan,34 Daryaganj,Floor 2,New Delhi,Delhi,110002,9876543214
+testuser6@example.com,Anita,Desai,56 FC Road,Apt 101,Pune,Maharashtra,411005,9876543215
+testuser7@example.com,Rohan,Mehta,23 Marine Drive,Sea View,Mumbai,Maharashtra,400020,9876543216
+testuser8@example.com,Neha,Gupta,88 Hazratganj,Block B,Lucknow,Uttar Pradesh,226001,9876543217
+testuser9@example.com,Karan,Joshi,11 MI Road,Apt 3,Jaipur,Rajasthan,302001,9876543218
+testuser10@example.com,Pooja,Verma,77 Sector 17,Flat 44,Chandigarh,Chandigarh,160017,9876543219
