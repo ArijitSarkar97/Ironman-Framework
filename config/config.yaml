@@ -21,11 +21,13 @@ environments:
   orenge_pet:
     base_url: "https://www.orangepet.in/"
     username: "arijitsarkar999@gmail.com"
-    password: "Arijit@1234"
+    password: "Arijit@1234"  
+  aqua:
+    base_url: "https://www.orangepet.in"
+    username: "rangamlavanyars@gmail.com"
+    password: "Srinivas@jaya1"    
   orangepet_roopa:
     base_url: "https://www.orangepet.in/"
 logging:
   level: INFO
   format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-
-
