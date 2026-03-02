@@ -64,10 +64,22 @@ def driver(request, config):
         options.add_argument("--no-sandbox")
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--disable-extensions")
-        options.page_load_strategy="eager"
-        options.set_capability('goog:loggingPrefs', {'performance': 'ALL', 'browser': 'ALL'})
+        # Remove "Chrome is being controlled by automated test software"
+        options.add_experimental_option("excludeSwitches", ["enable-automation"])
+
+        # Disable automation extension
+        options.add_experimental_option("useAutomationExtension", False)
+
+        # Disable blink automation flag
+        options.add_argument("--disable-blink-features=AutomationControlled")
+
+        options.page_load_strategy = 'eager'
         try:
             driver = webdriver.Chrome(options=options)
+            # Remove webdriver property
+            driver.execute_script(
+                "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+            )
         except Exception as e:
             raise RuntimeError(
                 f"Failed to start Chrome. Make sure Google Chrome is installed.\n"
@@ -91,31 +103,6 @@ def driver(request, config):
     yield driver
     
     if driver:
-        # Collect DOM info
-        try:
-            with open("dom_info.md", "a", encoding="utf-8") as f:
-                f.write(f"\n## DOM Capture - {driver.title} - {driver.current_url}\n")
-                f.write("```html\n")
-                f.write(driver.page_source)
-                f.write("\n```\n")
-        except Exception:
-            pass
-
-        # Collect DevTools info
-        try:
-            with open("web_application_info.md", "a", encoding="utf-8") as f:
-                f.write(f"\n## DevTools Logs Session\n")
-                f.write("### Browser Console Logs\n```text\n")
-                for e in driver.get_log('browser'):
-                    f.write(f"{e}\n")
-                f.write("```\n### Performance Logs (Network)\n```text\n")
-                logs = driver.get_log('performance')
-                # Writing only the last 20 to avoid massive files
-                for e in logs[-20:]:
-                    f.write(f"{e}\n")
-                f.write("```\n")
-        except Exception:
-            pass
         driver.quit()
 
 @pytest.hookimpl(hookwrapper=True)
