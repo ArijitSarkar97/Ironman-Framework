@@ -19,7 +19,7 @@ from utils.data_reader import read_excel_data
 @allure.epic("pytest-automation")
 @allure.feature("AutomationTestingPraPage")
 class TestOrangePetLogin(BaseTest):
-    data=read_excel_data(r"/Users/erajee/PycharmProjects/Ironman-Framework/test data/checkout_test_data.xlsx")
+    data=read_excel_data(r"test data/checkout_test_data.xlsx")
 
     @allure.story("test_automation_testing_pra_page_fill_all_inputs")
     @allure.title("test_automation_testing_pra_page_fill_all_inputs Execution")
