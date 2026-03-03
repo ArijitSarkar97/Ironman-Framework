@@ -34,7 +34,7 @@ pipeline {
         stage('Run Pytest with Allure') {
             steps {
                 bat """
-                %VENV%\\Scripts\\pytest -vs --alluredir=%ALLURE_RESULTS%
+                %VENV%\\Scripts\\pytest -vs -m pratish --alluredir=%ALLURE_RESULTS%
                 """
             }
         }
