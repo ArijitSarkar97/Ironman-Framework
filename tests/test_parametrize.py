@@ -13,7 +13,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from tests.base_test import BaseTest
 from pages.automation_testing_pra_page import AutomationTestingPraPage
-from utils.data_reader import read_excel_data
+from utils.data_reader_prathesh import read_excel_data
 
 
 @allure.epic("pytest-automation")
