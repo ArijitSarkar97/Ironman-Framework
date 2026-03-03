@@ -1,4 +1,5 @@
 import pytest
+import os
 from time import sleep
 import allure
 from pages.orange_pet_home_page import OrangePetHomePage
@@ -13,13 +14,15 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from tests.base_test import BaseTest
 from pages.automation_testing_pra_page import AutomationTestingPraPage
-from utils.data_reader import read_excel_data
+from utils.data_reader_prathesh import read_excel_data
 
 
 @allure.epic("pytest-automation")
 @allure.feature("AutomationTestingPraPage")
 class TestOrangePetLogin(BaseTest):
-    data=read_excel_data(r"/Users/erajee/PycharmProjects/Ironman-Framework/test data/checkout_test_data.xlsx")
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    file_path = os.path.join(BASE_DIR, "test-data", "checkout_test_data.xlsx")
+    data = read_excel_data(file_path)
 
     @allure.story("test_automation_testing_pra_page_fill_all_inputs")
     @allure.title("test_automation_testing_pra_page_fill_all_inputs Execution")
