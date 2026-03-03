@@ -19,10 +19,11 @@ class SeedBasedFood(BasePage):
     ENTER_FIRST_NAME = (By.XPATH,'//input[@placeholder="First name"]')
     ENTER_LAST_NAME = (By.XPATH,'//input[@placeholder="Last name"]')
     ENTER_ADDRESS = (By.XPATH,'//input[@placeholder="Address"]')
-    ENTER_APARTMENT = (By.XPATH,'//input[@placeholder="Address"]')
+    ENTER_APARTMENT = (By.XPATH,'//input[@placeholder="Apartment, suite, etc. (optional)"]')
     ENTER_CITY_NAME = (By.XPATH,'//input[@placeholder="City"]')
-    CLICK_STATE = (By.XPATH,'//select[@name="zone"]')
-    SELECT_STATE = (By.XPATH,"(//select[@class = 'ZHJU6 _1k3449n7 _1k3449n5 _1fragemzf oAlPg IWR5K tu1VS'])[2]")
+    SCROLL_SHIPPING_METHOD = (By.XPATH,'//strong[text()="Total"]')
+    SELECT_STATE = (By.XPATH,'//select[@name="zone"]')
+
     ENTER_PIN_CODE = (By.XPATH,'//input[@placeholder="PIN code"]')
     ENTER_PHONE = (By.XPATH,'//input[@placeholder="Phone"]')
     SAVE_THIS_INFO = (By.XPATH,'(//input[@type="checkbox"])[2]')
@@ -95,21 +96,17 @@ class SeedBasedFood(BasePage):
     def enter_address(self, text):
         return self.enter_text(self.ENTER_ADDRESS, text)
 
-    @allure.step("Enter Address")
+    @allure.step("Scroll to State")
+    def scroll_to_state(self):
+        return self.scroll_to_element(self.SCROLL_SHIPPING_METHOD)
+
+    @allure.step("Enter Apartment")
     def enter_apartment(self, text):
         return self.enter_text(self.ENTER_APARTMENT, text)
 
     @allure.step("Enter City Name")
     def enter_city(self,text):
         return self.enter_text(self.ENTER_CITY_NAME, text)
-
-    @allure.step("Scroll to State")
-    def scroll_to_state(self):
-        return self.scroll_to_element(self.CLICK_STATE)
-
-    @allure.step("Click State")
-    def click_state(self):
-        return self.click(self.CLICK_STATE)
 
     @allure.step("Enter State")
     def select_state(self,text):
@@ -123,9 +120,6 @@ class SeedBasedFood(BasePage):
     def enter_phone(self,text):
         return self.enter_text(self.ENTER_PHONE,text)
 
-    @allure.step("Save Info")
-    def click_save_info(self):
-        return self.click(self.SAVE_THIS_INFO)
 
 
 

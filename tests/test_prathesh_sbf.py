@@ -79,18 +79,12 @@ class TestSmallAnimals(BaseTest):
         with allure.step("Enter City Name"):
             small_animals.enter_city("Tiruchirappalli")
             self.logger.info("Enter City")
-        with allure.step("Click State"):
-            small_animals.click_state()
-            self.logger.info("Click State")
         with allure.step("Select State"):
             small_animals.select_state("Karnataka")
             self.logger.info("Select State")
         with allure.step("Enter Phone"):
             small_animals.enter_PINCODE("620006")
             self.logger.info("Enter Phone")
-        with allure.step("Click Save Info"):
-            small_animals.click_save_info()
-            self.logger.info("Click Save Info")
         with allure.step("Orange Pet Nutrition"):
             pelleted_food.scroll_orange_text()
             self.logger.info("Click Orange Pet")
@@ -151,18 +145,12 @@ class TestSmallAnimals(BaseTest):
         with allure.step("Enter City Name"):
             small_animals.enter_city("Tiruchirappalli")
             self.logger.info("Enter City")
-        with allure.step("Click State"):
-            small_animals.click_state()
-            self.logger.info("Click State")
         with allure.step("Select State"):
             small_animals.select_state("Karnataka")
             self.logger.info("Select State")
         with allure.step("Enter Phone"):
             small_animals.enter_PINCODE("620006")
             self.logger.info("Enter Phone")
-        with allure.step("Click Save Info"):
-            small_animals.click_save_info()
-            self.logger.info("Click Save Info")
         with allure.step("Orange Pet Nutrition"):
             pelleted_food.scroll_orange_text()
             self.logger.info("Click Orange Pet")
@@ -217,25 +205,25 @@ class TestSmallAnimals(BaseTest):
         with allure.step("Enter address"):
             small_animals.enter_address("Sriranga,Trichy,TamilNadu")
             self.logger.info("Enter Address")
+        with allure.step("Scroll to Shipping Method"):
+            small_animals.scroll_to_state()
+            self.logger.info("Scroll to Info")
         with allure.step("Enter Apartment"):
             small_animals.enter_apartment("MN Gurugokulam")
             self.logger.info("Enter Apartment")
         with allure.step("Enter City Name"):
             small_animals.enter_city("Tiruchirappalli")
             self.logger.info("Enter City")
-        with allure.step("Click State"):
-            small_animals.click_state()
-            self.logger.info("Click State")
+
         with allure.step("Select State"):
             small_animals.select_state("Karnataka")
             self.logger.info("Select State")
-        with allure.step("Enter Phone"):
+
+        with allure.step("Enter PinCode"):
             small_animals.enter_PINCODE("620006")
+            self.logger.info("Enter PinCode")
+        with allure.step("Enter Phone"):
+            small_animals.enter_phone("9342765674")
             self.logger.info("Enter Phone")
-        with allure.step("Click Save Info"):
-            small_animals.click_save_info()
-            self.logger.info("Click Save Info")
 
 
-        # with allure.step("Hover to Palleted Food"):
-        #     small_animals.hov
