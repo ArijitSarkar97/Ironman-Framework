@@ -16,6 +16,7 @@ from utils.data_reader_prathesh import read_excel_data
 
 @allure.epic("pytest-automation")
 @allure.feature("AutomationTestingPraPage")
+@pytest.mark.pratish
 @pytest.mark.flaky(reruns = 2, reruns_delay = 2)
 class TestSmallAnimals(BaseTest):
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
