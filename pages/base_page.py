@@ -164,3 +164,7 @@ class BasePage:
             self.logger.info("Accepted alert")
         except:
             self.logger.warning("No alert found to accept")
+
+
+
+
