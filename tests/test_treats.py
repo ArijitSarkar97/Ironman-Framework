@@ -2,7 +2,7 @@ import pytest
 import allure
 from tests.base_test import BaseTest
 from pages.treats_page import TreatsPage
-from utils.data_reader import read_excel_data
+from utils.data_reader_prathesh import read_excel_data
 
 @allure.epic("pytest-automation")
 @allure.feature("Treats Navigation")
@@ -12,9 +12,9 @@ class TestTreatsPage(BaseTest):
     # @allure.title("Navigate to Small Animal Treats Page")
     # @allure.severity(allure.severity_level.NORMAL)
 
-    file_path=r"C:\Users\Ram\PycharmProjects\Ironman-Framework\test-data\checkout_test_data.xlsx"
+    file_path=r"test-data\checkout_test_data.xlsx"
     sheet_name="CheckoutData"
-    test_data=read_excel_data(file_path,sheet_name)
+    test_data=read_excel_data(file_path)
 
     @pytest.mark.parametrize("email,firstname,lastname,address,apartment,city,state_name,pincode,phone",test_data)
     def test_small_animal_treats_navigation(self, driver, config,email,firstname,lastname,address,apartment,city,state_name,pincode,phone):
