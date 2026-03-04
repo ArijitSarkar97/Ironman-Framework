@@ -16,32 +16,55 @@ pipeline {
 
         stage('Create Virtual Environment') {
             steps {
-                bat """
-                python -m venv %VENV%
-                """
+                script {
+                    if (isUnix()) {
+                        sh "python3 -m venv ${VENV}"
+                    } else {
+                        bat "python -m venv %VENV%"
+                    }
+                }
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat """
-                %VENV%\\Scripts\\pip install --upgrade pip
-                %VENV%\\Scripts\\pip install -r requirements.txt
-                """
+                script {
+                    if (isUnix()) {
+                        sh """
+                        source ${VENV}/bin/activate
+                        pip install --upgrade pip
+                        pip install -r requirements.txt
+                        """
+                    } else {
+                        bat """
+                        ${VENV}\\Scripts\\pip install --upgrade pip
+                        ${VENV}\\Scripts\\pip install -r requirements.txt
+                        """
+                    }
+                }
             }
         }
 
-        stage('Run Pytest with Allure') {
+        stage('Run Tests') {
             steps {
-                bat """
-                %VENV%\\Scripts\\pytest -vs -m pratish --alluredir=%ALLURE_RESULTS%
-                """
+                script {
+                    if (isUnix()) {
+                        sh """
+                        source ${VENV}/bin/activate
+                        pytest -vs --alluredir=${ALLURE_RESULTS}
+                        """
+                    } else {
+                        bat """
+                        ${VENV}\\Scripts\\pytest -vs -m pratish --alluredir=%ALLURE_RESULTS%
+                        """
+                    }
+                }
             }
         }
 
         stage('Publish Allure Report') {
             steps {
-                allure includeProperties: false, jdk: '', results: [[path: "${ALLURE_RESULTS}"]]
+                allure includeProperties: false, results: [[path: "${ALLURE_RESULTS}"]]
             }
         }
     }
