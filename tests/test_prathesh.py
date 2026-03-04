@@ -17,7 +17,7 @@ from utils.data_reader_prathesh import read_excel_data
 @allure.feature("AutomationTestingPraPage")
 @pytest.mark.flaky(reruns = 2, reruns_delay = 2)
 class TestSmallAnimals(BaseTest):
-    data = read_excel_data(r"C:\Users\shoba\OneDrive\Desktop\New folder (3)\Ironman-Framework\test-data\checkout_test_data.xlsx")
+    data = read_excel_data(r"test-data\checkout_test_data.xlsx")
 
     @allure.story("test_automation_testing_pra_page_fill_all_inputs")
     @allure.title("test_automation_testing_pra_page_fill_all_inputs Execution")
