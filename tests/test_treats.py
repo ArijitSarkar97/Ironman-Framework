@@ -14,7 +14,7 @@ class TestTreatsPage(BaseTest):
 
     file_path=r"test-data\checkout_test_data.xlsx"
     sheet_name="CheckoutData"
-    test_data=read_excel_data(file_path)
+    test_data=read_excel_data(file_path,"CheckoutData")
 
     @pytest.mark.parametrize("email,firstname,lastname,address,apartment,city,state_name,pincode,phone",test_data)
     def test_small_animal_treats_navigation(self, driver, config,email,firstname,lastname,address,apartment,city,state_name,pincode,phone):
@@ -79,4 +79,3 @@ class TestTreatsPage(BaseTest):
 
         with allure.step("Enter Phone Number"):
             treats_page.enter_phone(phone)
-

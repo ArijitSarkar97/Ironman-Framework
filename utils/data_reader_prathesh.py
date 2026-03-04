@@ -44,14 +44,13 @@ def read_test_data(file_path: str, format: str = 'csv') -> List:
 #     for row in sheet.iter_rows(min_row=2, values_only=True):
 #         data.append(tuple(row))
 #
-#     return data
+#     return datax
 
 import pandas as pd
 
 def read_excel_data(file_path, sheet_name):
     df = pd.read_excel(file_path, sheet_name=sheet_name)
 
-    # Convert dataframe rows to list of tuples
     data = [tuple(row) for row in df.values]
 
     return data
