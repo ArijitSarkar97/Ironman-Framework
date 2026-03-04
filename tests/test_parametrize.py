@@ -16,7 +16,7 @@ from tests.base_test import BaseTest
 from pages.automation_testing_pra_page import AutomationTestingPraPage
 from utils.data_reader_prathesh import read_excel_data
 
-
+@pytest.mark.pratish
 @allure.epic("pytest-automation")
 @allure.feature("AutomationTestingPraPage")
 class TestOrangePetLogin(BaseTest):
