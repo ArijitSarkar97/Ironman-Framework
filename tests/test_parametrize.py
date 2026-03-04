@@ -22,6 +22,8 @@ from utils.data_reader_prathesh import read_excel_data
 class TestOrangePetLogin(BaseTest):
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     file_path = os.path.join(BASE_DIR, "test-data", "checkout_test_data.xlsx")
+
+
     data = read_excel_data(file_path,"CheckoutData")
 
     @allure.story("test_automation_testing_pra_page_fill_all_inputs")
