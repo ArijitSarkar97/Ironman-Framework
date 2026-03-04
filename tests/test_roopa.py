@@ -13,7 +13,7 @@ from utils.data_reader import get_excel_data
 @allure.feature("orangepetpractice")
 class TestOrangePetPage(BaseTest):
 
-    file_path = r"D:\TekPyramid\orangepet\Ironman-Framework\test-data\contact_details (1).xlsx"
+    file_path = r"test-data\contact_details.xlsx"
     sheet_name = "contact_details"
 
     test_data = get_excel_data(file_path, sheet_name)

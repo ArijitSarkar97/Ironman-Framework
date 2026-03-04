@@ -1,5 +1,6 @@
 import pytest
 import time
+import os
 import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -15,9 +16,12 @@ from utils.data_reader_prathesh import read_excel_data
 
 @allure.epic("pytest-automation")
 @allure.feature("AutomationTestingPraPage")
+@pytest.mark.pratish
 @pytest.mark.flaky(reruns = 2, reruns_delay = 2)
 class TestSmallAnimals(BaseTest):
-    data = read_excel_data(r"test-data\checkout_test_data.xlsx")
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    file_path = os.path.join(BASE_DIR, "test-data", "checkout_test_data.xlsx")
+    data = read_excel_data(file_path)
 
     @allure.story("test_automation_testing_pra_page_fill_all_inputs")
     @allure.title("test_automation_testing_pra_page_fill_all_inputs Execution")
@@ -32,9 +36,14 @@ class TestSmallAnimals(BaseTest):
         supplements = Supplements(driver)
         driver.get(config.get('environments', {}).get('test', {}).get('base_url', ''))
 
-        with allure.step("Hover to Seed based food"):
-            small_animals.click_small_animals()
-            self.logger.info("Click Seed based food")
+        with allure.step("Hover over small animals"):
+            pelleted_food.hover_to_small_animals()
+            self.logger.info("Hover over small animals")
+        with allure.step("Select Supplement"):
+            supplements.click_supplements()
+            self.logger.info("Select Supplement")
+
+
         with allure.step("Click to filter dropdown"):
             small_animals.click_filter_dropdown()
             self.logger.info("Click filter dropdown")
@@ -42,7 +51,7 @@ class TestSmallAnimals(BaseTest):
             small_animals.select_checkbox()
             self.logger.info("Click Checkbox")
         with allure.step("Scroll down to Element"):
-            small_animals.scroll_to_pet_prod()
+            supplements.scroll_to_supplements()
             self.logger.info("Scroll down to Element")
         with allure.step("Click Product Image"):
             small_animals.click_product_image()

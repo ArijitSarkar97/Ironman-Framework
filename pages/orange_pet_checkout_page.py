@@ -26,7 +26,7 @@ class OrangePetCheckoutPage(BasePage):
     APARTMENT=('xpath','//input[@placeholder="Apartment, suite, etc. (optional)"]')
     CITY=('xpath','//input[@placeholder="City"]')
     C_STATE=('xpath','//select[@name="zone"]')
-    STATE=('xpath','(//select[@class="ZHJU6 _1k3449n7 _1k3449n5 _1fragemzf oAlPg IWR5K tu1VS"])[2]')
+    STATE=('xpath','//select[@name="zone"]')
     PINCODE=('xpath','//input[@placeholder="PIN code"]')
     PHONENO=('xpath','//input[@placeholder="Phone"]')
     PAYNOW=('xpath','//button[@id="checkout-pay-button"]')
