@@ -48,17 +48,17 @@ pipeline {
         stage('Run Tests') {
             steps {
                 bat """
-                %VENV%\\Scripts\\pytest -vs --alluredir=%ALLURE_RESULTS%
+                %VENV%\\Scripts\\pytest -vs -m arsha --alluredir=%ALLURE_RESULTS%
                 """
                 script {
                     if (isUnix()) {
                         sh """
                         source ${VENV}/bin/activate
-                        pytest -vs --alluredir=${ALLURE_RESULTS}
+                        pytest -vs -m arsha --alluredir=${ALLURE_RESULTS}
                         """
                     } else {
                         bat """
-                        ${VENV}\\Scripts\\pytest -vs --alluredir=%ALLURE_RESULTS% -m arsha
+                        ${VENV}\\Scripts\\pytest -vs -m arsha --alluredir=%ALLURE_RESULTS%
                         """
                     }
                 }
