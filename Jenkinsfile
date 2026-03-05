@@ -58,7 +58,7 @@ pipeline {
                         """
                     } else {
                         bat """
-                        ${VENV}\\Scripts\\pytest -vs -m pratish --alluredir=%ALLURE_RESULTS%
+                        ${VENV}\\Scripts\\pytest -vs -m arsha --alluredir=%ALLURE_RESULTS%
                         """
                     }
                 }

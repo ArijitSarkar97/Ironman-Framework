@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 file_path = os.path.join(BASE_DIR, "test-data", "checkout_test_data.xlsx")
 
 excel_data = get_excel_data(file_path, "searchproduct")
-
+@pytest.mark.arsha
 @allure.epic("pytest-automation")
 @allure.feature("Aquatics and Reptiles page")
 class TestHomepageSearchFunctionality(BaseTest):
