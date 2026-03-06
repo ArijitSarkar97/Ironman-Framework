@@ -54,7 +54,7 @@ pipeline {
                     if (isUnix()) {
                         sh """
                         source ${VENV}/bin/activate
-                        pytest -vs -m arsha --alluredir=${ALLURE_RESULTS}
+                        pytest -vs --alluredir=${ALLURE_RESULTS}
                         """
                     } else {
                         bat """

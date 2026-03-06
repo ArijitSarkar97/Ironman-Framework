@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 from tests.base_test import BaseTest
 from pages.aquatics_and_reptiles_fish_in_stock_sort_by_price import AquaticsandReptilesfiler
-@pytest.mark.arsha
+
 @allure.epic("pytest-automation")
 @allure.feature("Aquatics and Reptiles page")
 class TestAquaticsandReptiles(BaseTest):
