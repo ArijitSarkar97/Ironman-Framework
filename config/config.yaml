@@ -59,7 +59,21 @@ environments:
     api_config:
       base_url: "http://localhost:8000"
       use_mock: true
-logging:
+  test:
+    base_url: "https://www.orangepet.in/"
+    username:
+    password:
+  catmod:
+    base_url: "https://www.orangepet.in/"
+    username: "varshitharc@gmail.com"
+    password: "newuser"
+  aqua:
+    base_url: "https://www.orangepet.in"
+    username: "rangamlavanyars@gmail.com"
+    password: "Srinivas@jaya1"
+  orangepet_roopa:
+    base_url: "https://www.orangepet.in/"
 
+logging:
   level: INFO
   format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"

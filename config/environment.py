@@ -17,7 +17,8 @@ class Environment:
         Initialize environment configuration.
         
         Args:
-            env_name: Environment name (dev, staging, prod). If None, uses ENV environment variable or defaults to 'dev'
+            env_name: Environment name (dev, staging, prod, orange_pet, mock, catmod, etc.). 
+                     If None, uses ENV environment variable or defaults to 'orange_pet'
         """
         self.env_name = env_name or os.getenv('ENV', 'orange_pet')
         self.config = self._load_config()
@@ -45,11 +46,11 @@ class Environment:
     
     def get_username(self):
         """Get username for current environment."""
-        return self.current_env['username']
+        return self.current_env.get('username')
     
     def get_password(self):
         """Get password for current environment."""
-        return self.current_env['password']
+        return self.current_env.get('password')
     
     def get_db_config(self):
         """Get database configuration for current environment."""
@@ -60,7 +61,6 @@ class Environment:
         return self.current_env.get('api_config', {})
     
     def get_browser_config(self):
-
         """Get browser configuration."""
         return self.config['browser']
     
