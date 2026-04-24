@@ -3,12 +3,21 @@ import json
 import os
 import logging
 import allure
+import threading
+import uvicorn
+import time
 from colorlog import ColoredFormatter
 from selenium import webdriver
+from mock_server.main import app
+from api_clients.auth_client import AuthClient
 
 # --- Logging Setup with ColorLog ---
 @pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
+    # Set environment variable early for the Environment class
+    env_name = config.getoption("--env", default="orange_pet")
+    os.environ['ENV'] = env_name
+
     formatter = ColoredFormatter(
         "%(log_color)s%(levelname)-8s%(reset)s %(white)s%(message)s",
         datefmt=None,
@@ -33,13 +42,37 @@ def pytest_configure(config):
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default=None, help="Browser to run tests on (chrome, firefox, edge)")
     parser.addoption("--headless", action="store_true", default=None, help="Run tests in headless mode")
+    parser.addoption("--env", action="store", default="orange_pet", help="Environment to run tests on (dev, staging, prod, orange_pet, mock)")
 
 @pytest.fixture(scope="session")
-def config():
+def config(request):
     import yaml
     config_path = os.path.join(os.path.dirname(__file__), 'config', 'config.yaml')
     with open(config_path) as f:
         return yaml.safe_load(f)
+
+@pytest.fixture(scope="session", autouse=True)
+def run_mock_server(request):
+    """Starts the mock server if the environment is set to 'mock'."""
+    env = request.config.getoption("--env")
+    if env == "mock":
+        # Start uvicorn in a separate thread
+        config = uvicorn.Config(app, host="127.0.0.1", port=8000, log_level="info")
+        server = uvicorn.Server(config)
+        thread = threading.Thread(target=server.run, daemon=True)
+        thread.start()
+        
+        # Give the server a moment to start
+        time.sleep(1)
+        logging.info("Mock Server started at http://127.0.0.1:8000")
+        
+        yield
+        
+        # Shutdown server
+        server.should_exit = True
+        thread.join(timeout=2)
+    else:
+        yield
 
 @pytest.fixture(scope="function")
 def driver(request, config):
@@ -104,6 +137,40 @@ def driver(request, config):
     
     if driver:
         driver.quit()
+
+@pytest.fixture(scope="session")
+def auth_api(request):
+    """Fixture to provide AuthAPI client."""
+    env_name = request.config.getoption("--env")
+    return AuthClient(env_name=env_name)
+
+@pytest.fixture(scope="function")
+def api_authenticated_driver(driver, auth_api, config):
+    """
+    Hybrid Fixture: 
+    1. Logs in via API.
+    2. Injects token into browser.
+    3. Returns the driver ready for UI actions.
+    """
+    # 1. Get token via API
+    token = auth_api.get_token("admin", "password")
+    
+    if token:
+        # 2. Open base URL first (Selenium needs to be on the domain to set cookies)
+        driver.get(config['environments'][os.getenv('ENV')]['base_url'])
+        
+        # 3. Inject token as a cookie
+        driver.add_cookie({
+            "name": "auth_token",
+            "value": token,
+            "path": "/"
+        })
+        
+        # 4. Refresh to apply the session
+        driver.refresh()
+        logging.info("Successfully injected API token into browser session.")
+    
+    return driver
 
 @pytest.hookimpl(hookwrapper=True)
 def pytest_runtest_makereport(item, call):

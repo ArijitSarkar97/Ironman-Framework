@@ -10,18 +10,56 @@ environments:
     base_url: "https://testautomationpractice.blogspot.com/"
     username: "admin"
     password: "password"
+    db_config:
+      host: "localhost"
+      port: 3306
+      user: "dev_user"
+      password: "dev_password"
+      database: "dev_db"
+    api_config:
+      base_url: "https://jsonplaceholder.typicode.com"
   staging:
     base_url: "https://testautomationpractice.blogspot.com/"
     username: "admin"
     password: "password"
+    db_config:
+      host: "staging-db.example.com"
+      port: 3306
+      user: "staging_user"
+      password: "staging_password"
+      database: "staging_db"
+    api_config:
+      base_url: "https://jsonplaceholder.typicode.com"
   prod:
     base_url: "https://testautomationpractice.blogspot.com/"
     username: "admin"
     password: "password"
+    db_config:
+      host: "prod-db.example.com"
+      port: 3306
+      user: "prod_user"
+      password: "prod_password"
+      database: "prod_db"
+    api_config:
+      base_url: "https://api.example.com"
   orange_pet:
     base_url: "https://www.orangepet.in/"
     username: "arijitsarkar999@gmail.com"
     password: "Arijit@1234"
+    db_config:
+      host: "localhost"
+      port: 3306
+      user: "orange_user"
+      password: "orange_password"
+      database: "orange_db"
+    api_config:
+      base_url: "https://jsonplaceholder.typicode.com"
+  mock:
+    base_url: "https://testautomationpractice.blogspot.com/"
+    api_config:
+      base_url: "http://localhost:8000"
+      use_mock: true
 logging:
+
   level: INFO
   format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
