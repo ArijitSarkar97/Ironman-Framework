@@ -40,22 +40,36 @@ class BasePage:
         return (locator_map.get(locator_type.lower(), By.ID), locator_value)
 
     @allure.step("Finding element: {locator}")
-    def find_element(self, locator):
+    def find_element(self, locator, retries=2):
         converted_locator = self._convert_locator(locator)
-        try:
-            return WebDriverWait(self.driver, self.timeout).until(
-                EC.visibility_of_element_located(converted_locator)
-            )
-        except TimeoutException:
-            self.logger.error(f"Element not found within {self.timeout}s: {locator}")
-            raise
+        for attempt in range(retries + 1):
+            try:
+                return WebDriverWait(self.driver, self.timeout).until(
+                    EC.visibility_of_element_located(converted_locator)
+                )
+            except TimeoutException:
+                if attempt < retries:
+                    self.logger.warning(f"Timeout finding {locator}, retrying {attempt + 1}/{retries}...")
+                    time.sleep(1)
+                else:
+                    self.logger.error(f"Element not found within {self.timeout}s: {locator}")
+                    raise
 
     @allure.step("Finding elements: {locator}")
-    def find_elements(self, locator):
+    def find_elements(self, locator, retries=2):
         converted_locator = self._convert_locator(locator)
-        return WebDriverWait(self.driver, self.timeout).until(
-            EC.presence_of_all_elements_located(converted_locator)
-        )
+        for attempt in range(retries + 1):
+            try:
+                return WebDriverWait(self.driver, self.timeout).until(
+                    EC.presence_of_all_elements_located(converted_locator)
+                )
+            except TimeoutException:
+                if attempt < retries:
+                    self.logger.warning(f"Timeout finding elements {locator}, retrying {attempt + 1}/{retries}...")
+                    time.sleep(1)
+                else:
+                    self.logger.error(f"Elements not found within {self.timeout}s: {locator}")
+                    raise
 
     # --- Actions ---
 
