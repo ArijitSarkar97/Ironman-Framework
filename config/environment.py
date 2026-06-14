@@ -52,10 +52,6 @@ class Environment:
         """Get password for current environment."""
         return self.current_env.get('password')
     
-    def get_db_config(self):
-        """Get database configuration for current environment."""
-        return self.current_env.get('db_config', {})
-    
     def get_api_config(self):
         """Get API configuration for current environment."""
         return self.current_env.get('api_config', {})
