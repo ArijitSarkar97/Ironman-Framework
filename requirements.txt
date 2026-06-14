@@ -7,7 +7,6 @@ PyYAML==6.0.3
 allure-python-commons
 openpyxl>=3.1.5
 pytest-rerunfailures
-mysql-connector-python
 requests
 fastapi
 uvicorn
